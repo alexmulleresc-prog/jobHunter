@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.scrapers.remoteok import buscar_empleos
+from backend.services.job_service import JobService
 
 app = FastAPI(title="JobHunter AI")
 
@@ -11,5 +11,6 @@ def inicio():
 
 @app.get("/empleos")
 def obtener_empleos():
-    return buscar_empleos()
+    service = JobService()
+    return service.obtener_empleos()
 
