@@ -19,3 +19,14 @@ class JobRepository:
             raise
         finally:
             session.close()
+
+    def exists(self, url: str) -> bool:
+        session = SessionLocal()
+        try:
+            job=session.query(JobModel).filter_by(url=url).first()
+            return job is not None
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
