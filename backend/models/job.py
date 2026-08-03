@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel
 
 class Job(BaseModel):
@@ -5,3 +6,10 @@ class Job(BaseModel):
     empresa: str
     ubicacion: str
     url: str
+    fecha_publicacion: datetime | None = None
+    fecha_scraping: datetime = datetime.now()
+    descripcion: str | None = None
+    tipo_empleo: str | None = None
+    modalidad: str | None = None
+    salario: str | None = None
+    empresa_logo: str | None = None

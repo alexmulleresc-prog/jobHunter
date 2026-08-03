@@ -11,7 +11,15 @@ class JobRepository:
                 titulo=job.titulo,
                 empresa=job.empresa,
                 ubicacion=job.ubicacion,
-                url=job.url,)
+                url=job.url,
+                fecha_publicacion=job.fecha_publicacion,
+                fecha_scraping=job.fecha_scraping,
+                descripcion=job.descripcion,
+                tipo_empleo=job.tipo_empleo,
+                modalidad=job.modalidad,
+                salario=job.salario,
+                empresa_logo=job.empresa_logo
+            )
             session.add(job_model)
             session.commit()
         except Exception:

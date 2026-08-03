@@ -1,3 +1,4 @@
+from datetime import datetime
 from bs4 import BeautifulSoup
 from backend.services.browser_service import obtener_html
 from backend.models.job import Job
@@ -27,7 +28,14 @@ class RemoteOKScraper(BaseScraper):
                 titulo=titulo.text.strip() if titulo else "",
                 empresa=empresa.text.strip() if empresa else "",
                 ubicacion=ubicacion.text.strip() if ubicacion else "",
-                url=url
+                url=url,
+                fecha_publicacion=None,
+                fecha_scraping=datetime.now(),
+                descripcion=None,
+                tipo_empleo=None,
+                modalidad=None,
+                salario=None,
+                empresa_logo=None
             )
             empleos.append(empleo)
         return empleos
