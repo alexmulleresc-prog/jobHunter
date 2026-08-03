@@ -1,11 +1,12 @@
 from backend.scrapers.remoteok import RemoteOKScraper
+from backend.scrapers.weworkremotely import WeWorkRemotelyScraper
 from backend.repositories.job_repository import JobRepository
 from backend.models import job
 from backend.database.database import SessionLocal
 
 class JobService:
     def __init__(self):
-        self.scrapers = [RemoteOKScraper()]
+        self.scrapers = [WeWorkRemotelyScraper(), RemoteOKScraper()]
         self.repository = JobRepository()
 
     def obtener_empleos(self):

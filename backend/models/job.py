@@ -13,3 +13,5 @@ class Job(BaseModel):
     modalidad: str | None = None
     salario: str | None = None
     empresa_logo: str | None = None
+    tags: list[str] = []
+    fuente: str

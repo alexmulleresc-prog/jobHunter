@@ -18,7 +18,9 @@ class JobRepository:
                 tipo_empleo=job.tipo_empleo,
                 modalidad=job.modalidad,
                 salario=job.salario,
-                empresa_logo=job.empresa_logo
+                empresa_logo=job.empresa_logo,
+                tags=job.tags,
+                fuente=job.fuente
             )
             session.add(job_model)
             session.commit()

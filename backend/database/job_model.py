@@ -1,6 +1,7 @@
 from datetime import datetime
 from backend.database.base import Base
 from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.dialects.postgresql import JSONB
 
 class JobModel(Base):
     __tablename__ = "jobs"
@@ -17,3 +18,5 @@ class JobModel(Base):
     modalidad: Mapped[str | None] = mapped_column()
     salario: Mapped[str | None] = mapped_column()
     empresa_logo: Mapped[str | None] = mapped_column()
+    tags: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    fuente: Mapped[str] = mapped_column()
