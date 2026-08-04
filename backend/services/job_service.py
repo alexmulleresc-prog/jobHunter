@@ -18,3 +18,18 @@ class JobService:
                     self.repository.create(job)
             empleos.extend(jobs)
         return empleos
+
+    def get_all(self):
+        return self.repository.get_all()
+
+    def get_by_fuente(self, fuente: str):
+        return self.repository.get_by_fuente(fuente)
+
+    def get_by_empresa(self, empresa: str):
+        return self.repository.get_by_empresa(empresa)
+
+    def get_by_modalidad(self, modalidad: str):
+        return self.repository.get_by_modalidad(modalidad)
+
+    def get_by_tag(self, tag: str):
+        return self.repository.get_by_tag(tag)
