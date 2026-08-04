@@ -62,7 +62,6 @@ class JobRepository:
     def _to_jobs(self, job_models: list[JobModel]) -> list[Job]:
         return [self._to_job(job) for job in job_models]
 
-#FILTROS
 
     def get_all(self)->list[Job]:
         session = SessionLocal()
@@ -75,43 +74,19 @@ class JobRepository:
         finally:
             session.close()
 
-    def get_by_fuente(self, fuente: str) -> list[Job]:
+    def search(self,empresa: str | None = None,fuente: str|None = None, modalidad: str | None = None, tag: str | None = None) -> list[Job]:
         session = SessionLocal()
         try:
-            job_models = session.query(JobModel).filter_by(fuente=fuente).all()
-            return self._to_jobs(job_models)
-        except Exception:
-            session.rollback()
-            raise
-        finally:
-            session.close()
-
-    def get_by_empresa(self, empresa: str) -> list[Job]:
-        session = SessionLocal()
-        try:
-            job_models = session.query(JobModel).filter_by(empresa=empresa).all()
-            return self._to_jobs(job_models)
-        except Exception:
-            session.rollback()
-            raise
-        finally:
-            session.close()
-
-    def get_by_modalidad(self, modalidad: str) -> list[Job]:
-        session = SessionLocal()
-        try:
-            job_models = session.query(JobModel).filter_by(modalidad=modalidad).all()
-            return self._to_jobs(job_models)
-        except Exception:
-            session.rollback()
-            raise
-        finally:
-            session.close()
-
-    def get_by_tag(self, tag: str) -> list[Job]:
-        session = SessionLocal()
-        try:
-            job_models = session.query(JobModel).filter(JobModel.tags.contains([tag])).all()
+            query = session.query(JobModel)
+            if empresa:
+                query = query.filter_by(empresa=empresa)
+            if fuente:
+                query = query.filter_by(fuente=fuente)
+            if modalidad:
+                query = query.filter_by(modalidad=modalidad)
+            if tag:
+                query = query.filter(JobModel.tags.contains([tag]))
+            job_models = query.all()
             return self._to_jobs(job_models)
         except Exception:
             session.rollback()
