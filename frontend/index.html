@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>🎯 JobHunter AI</h1>
+            <p>Find Smarter. Apply Faster.</p>
+        </div>
+        <div class="header-right">
+            <button id="update-button">
+                Actualizar empleos
+            </button>
+        </div>
+    </header>
+    <main>
+        <section id="dashboard">
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <div class="stat-number" id="total-jobs">
+                    320
+                </div>
+                <div class="stat-title">
+                    Empleos encontrados
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏢</div>
+                <div class="stat-number" id="total-companies">
+                    180
+                </div>
+                <div class="stat-title">
+                    Empresas únicas
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌐</div>
+                <div class="stat-number" id="total-sources">
+                    2
+                </div>
+                <div class="stat-title">
+                    Fuentes Activas
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✨</div>
+                <div class="stat-number" id="total-added">
+                    +8
+                </div>
+                <div class="stat-title">
+                    Nuevos empleos añadidos
+                </div>
+            </div>
+
+        </section>
+        <section id="search"></section>
+        <section id="jobs"></section>
+        <aside id="assistant"></aside>
+    </main>
+</body>
+</html>

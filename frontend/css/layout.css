@@ -1,0 +1,29 @@
+header{
+    /*border:1px solid red;
+    height: 80px;*/
+}
+#dashboard{
+   /*border:1px solid blue;
+    height:180px;*/
+}
+#search{
+    border:1px solid green;
+    height: 120px;
+}
+#jobs{
+    border:1px solid yellow;
+    height: 500px;
+}
+#assistant{
+    border:1px solid white;
+    height: 500px;
+}
+main{
+    max-width:var(--max-width);
+    margin:auto;
+    padding:var(--spacing-md);
+    display:grid;
+    gap:var(--spacing-md);
+    max-width:var(--container-width);
+
+}
