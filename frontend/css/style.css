@@ -24,6 +24,29 @@
     box-sizing:border-box;
 }
 
+#search{
+    margin:var(--spacing-xs) 0;
+}
+#search-input{
+    width:100%;
+    background:var(--surface);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:1rem;
+    border-radius:var(--radius);
+    font-size:1rem;
+}
+#search-input:focus{
+    outline:none;
+    border-color:var(--blue);
+}
+#results-info{
+    margin: var(--spacing-xs) 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 header{
     display:flex;
     justify-content:space-between;

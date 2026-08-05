@@ -8,10 +8,11 @@ def obtener_empleos(fuente: str | None = None,
                     empresa: str | None = None,
                     modalidad: str | None = None,
                     tag: str | None = None,
+                    search: str | None = None,
                     limit: int = 100,
                     offset: int = 0):
     service = JobService()
-    return service.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, limit=limit, offset=offset)
+    return service.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, search=search, limit=limit, offset=offset)
 
 @router.get("/empleos/todos")
 def obtener_todos_los_empleos():

@@ -1,4 +1,4 @@
-from sqlalchemy import func
+from sqlalchemy import func, or_
 from backend.database.database import SessionLocal
 from backend.database.job_model import JobModel
 from backend.models import job
@@ -80,7 +80,8 @@ class JobRepository:
     def search(self,empresa: str | None = None,
                fuente: str|None = None, 
                modalidad: str | None = None, 
-               tag: str | None = None, 
+               tag: str | None = None,
+               search: str | None = None, 
                limit: int = 100, 
                offset: int = 0,) -> list[Job]:
         session = SessionLocal()
@@ -94,6 +95,8 @@ class JobRepository:
                 query = query.filter(JobModel.modalidad.ilike(f"%{modalidad}%"))
             if tag:
                 query = query.filter(JobModel.tags.contains([tag]))
+            if search:
+                query = query.filter(or_(JobModel.titulo.ilike(f"%{search}%"),JobModel.empresa.ilike(f"%{search}%"),))
             query = query.offset(offset)
             query = query.limit(limit)
             job_models = query.all()

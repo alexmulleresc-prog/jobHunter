@@ -1,4 +1,5 @@
 const jobsContainer = document.getElementById("jobs");
+const resultsCount = document.getElementById("results-count");
 
 function formatDate(dateString){
 
@@ -68,8 +69,9 @@ function createJobCard(job){
     jobsContainer.appendChild(card)
 }
 
-async function loadJobs(){
-    const jobs = await getJobs();
+async function loadJobs(search = ""){
+    const jobs = await getJobs(search);
     jobsContainer.innerHTML = "";
+    resultsCount.textContent =`${jobs.length} resultados encontrados`;
     jobs.forEach(createJobCard);
 }

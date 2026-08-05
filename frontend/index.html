@@ -26,6 +26,9 @@
         </div>
     </header>
     <main>
+        <section id="search">
+            <input id="search-input" type="text" placeholder="Buscar por puesto, empresa o tecnología...">
+        </section>
         <section id="dashboard">
             <div class="stat-card">
                 <div class="stat-icon">📄</div>
@@ -65,13 +68,18 @@
             </div>
 
         </section>
-        <section id="search"></section>
+        <div id="results-info">
+            <span id="results-count">
+                Cargando empleos ...
+            </span>
+        </div>
         <section id="jobs"></section>
         <aside id="assistant"></aside>
     </main>
 </body>
 <script src="js/api.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/filters.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/app.js"></script>
 

@@ -5,7 +5,11 @@ async function getStats(){
     return await response.json();
 }
 
-async function getJobs(){
-    const response = await fetch(`${API_URL}/empleos`);
+async function getJobs(search = ""){
+    const response = await fetch(`${API_URL}/empleos?search=${encodeURIComponent(search)}`);
     return await response.json();
+}
+
+async function searchJobs(query){
+
 }
