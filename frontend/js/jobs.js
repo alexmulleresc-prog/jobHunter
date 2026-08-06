@@ -64,8 +64,8 @@ function createJobCard(job){
     jobsContainer.appendChild(card)
 }
 
-async function loadJobs(search = ""){
-    const jobs = await getJobs(search);
+async function loadJobs(filters = {}){
+    const jobs = await getJobs(filters);
     jobsContainer.innerHTML = "";
     resultsCount.textContent =`${jobs.length} resultados encontrados`;
     jobs.forEach(createJobCard);

@@ -5,8 +5,9 @@ async function getStats(){
     return await response.json();
 }
 
-async function getJobs(search = ""){
-    const response = await fetch(`${API_URL}/empleos?search=${encodeURIComponent(search)}`);
+async function getJobs(filters = {}){
+    const params = new URLSearchParams(filters);
+    const response = await fetch(`${API_URL}/empleos?${params}`);
     return await response.json();
 }
 

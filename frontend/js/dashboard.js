@@ -11,5 +11,5 @@ async function initializeDashboardFilters() {
     const filters = await getFilters();
     const companyCard = document.getElementById("companies-card");
     companyCard.addEventListener("click", () => {
-        showDropdown(companyCard, filters.companies);});
+        showDropdown(companyCard, filters.companies,async(company) =>{await loadJobs({empresa:company.name})});});
 }
