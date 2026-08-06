@@ -123,7 +123,7 @@ class JobRepository:
         session = SessionLocal()
         try:
             result = session.query(JobModel.fuente, func.count(JobModel.id)).group_by(JobModel.fuente).all()
-            return {fuente: count for fuente, count in result}
+            return [{"name": fuente, "count": count}for fuente, count in result]
         except Exception:
             session.rollback()
             raise
@@ -134,7 +134,7 @@ class JobRepository:
         session = SessionLocal()
         try:
             result = session.query(JobModel.empresa, func.count(JobModel.id)).group_by(JobModel.empresa).order_by(func.count(JobModel.id).desc()).limit(limit).all()
-            return [{"empresa": empresa, "empleos": count} for empresa, count in result]
+            return [{"name": empresa, "count": count} for empresa, count in result]
         except Exception:
             session.rollback()
             raise

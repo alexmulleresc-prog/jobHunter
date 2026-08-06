@@ -31,6 +31,13 @@ class JobService:
                limit: int = 100,
                offset: int = 0):
         return self.repository.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, search=search, limit=limit, offset=offset)
+#### FUNCION DE FILTROS ###
+    def get_filters(self):
+        return {
+            "companies": self.repository.get_top_companies(limit=50),
+            "sources": self.repository.get_jobs_by_source()
+    }
+    
 #### FUNCIONES DE ESTADISTICAS ###
     def get_total_jobs_count(self) -> int:
         return self.repository.get_total_jobs()

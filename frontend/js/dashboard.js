@@ -7,3 +7,9 @@ async function loadDashboard(){
     //document.getElementById("jobs-added").textContent = "-";
     
 }
+async function initializeDashboardFilters() {
+    const filters = await getFilters();
+    const companyCard = document.getElementById("companies-card");
+    companyCard.addEventListener("click", () => {
+        showDropdown(companyCard, filters.companies);});
+}

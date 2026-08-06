@@ -13,3 +13,8 @@ async function getJobs(search = ""){
 async function searchJobs(query){
 
 }
+
+async function getFilters(){
+    const response = await fetch(`${API_URL}/filters`);
+    return await response.json();
+}

@@ -18,3 +18,8 @@ def obtener_empleos(fuente: str | None = None,
 def obtener_todos_los_empleos():
     service = JobService()
     return service.get_all()
+
+@router.get("/filters")
+def get_filters():
+    service = JobService()
+    return service.get_filters()

@@ -2,9 +2,7 @@ const jobsContainer = document.getElementById("jobs");
 const resultsCount = document.getElementById("results-count");
 
 function formatDate(dateString){
-
     const date = new Date(dateString);
-
     return date.toLocaleDateString("es-AR",{
         day:"numeric",
         month:"short",
@@ -16,13 +14,10 @@ function formatDate(dateString){
 function formatLocation(location){
 
     if(!location) return "🌍 No especificada";
-
     if(location.toLowerCase().includes("world"))
         return "🌍 Worldwide";
-
     if(location.toLowerCase().includes("europe"))
         return "🇪🇺 Europe";
-
     return `📍 ${location}`;
 
 }

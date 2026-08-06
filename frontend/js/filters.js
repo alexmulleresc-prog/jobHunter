@@ -14,6 +14,6 @@ function handleSearch(){
     },300);
 }
 
-function searchJobs(){
+function initializeFilters(){
 
 }
