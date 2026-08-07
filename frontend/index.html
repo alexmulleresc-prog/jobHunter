@@ -32,8 +32,7 @@
         <section id="dashboard">
             <div class="stat-card" id="jobs-card">
                 <div class="stat-icon">📄</div>
-                <div class="stat-number" id="total-jobs">
-                    
+                <div class="stat-number" id="total-jobs">    
                 </div>
                 <div class="stat-title">
                     Empleos encontrados
@@ -41,8 +40,7 @@
             </div>
             <div class="stat-card" id="companies-card">
                 <div class="stat-icon">🏢</div>
-                <div class="stat-number" id="total-companies">
-                    
+                <div class="stat-number" id="total-companies">      
                 </div>
                 <div class="stat-title">
                     Empresas
@@ -50,8 +48,7 @@
             </div>
             <div class="stat-card" id="sources-card">
                 <div class="stat-icon">🌐</div>
-                <div class="stat-number" id="total-sources">
-                    
+                <div class="stat-number" id="total-sources">     
                 </div>
                 <div class="stat-title">
                     Fuentes Activas
@@ -59,19 +56,25 @@
             </div>
             <div class="stat-card" id="new-jobs-card">
                 <div class="stat-icon">✨</div>
-                <div class="stat-number" id="total-added">
-                    
+                <div class="stat-number" id="total-added">  
                 </div>
                 <div class="stat-title">
                     Nuevos empleos añadidos
                 </div>
             </div>
-
         </section>
         <div id="results-info">
             <span id="results-count">
                 Cargando empleos ...
             </span>
+        <section id="active-filters">
+             <div class="filter-chip">🏢 Datadog
+                <button>✕</button>
+            </div>
+            <div class="filter-chip">🌐 RemoteOK
+                <button>✕</button>
+            </div>
+        </section>
         </div>
         <section id="jobs"></section>
         <aside id="assistant"></aside>
@@ -83,6 +86,7 @@
 <script src="js/filters.js"></script>
 <script src="js/dropdown.js"></script>
 <script src="js/jobs.js"></script>
+<script src="js/activeFilters.js"></script>
 <script src="js/app.js"></script>
 
 </html>

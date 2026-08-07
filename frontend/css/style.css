@@ -127,13 +127,6 @@ body{
     border-color:var(--green);
     box-shadow: 0 8px 20px rgba(88,166,255,.15);
 }
-
-#results-info{
-    margin: var(--spacing-xs) 0;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 500;
-}
 .dropdown-menu{
     position:absolute;
     background:var(--surface);
@@ -165,6 +158,63 @@ body{
 }
 .dropdown-menu::-webkit-scrollbar-thumb:hover{
     background:var(--blue);
+}
+
+#results-info{
+    margin:.002rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+#active-filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem;
+    margin:.002rem;
+   
+}
+.filter-chip{
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+    justify-content:flex-end;
+    background:#21262D;
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:.45rem .8rem;
+    font-size:.9rem;
+}
+.filter-chip:hover{
+    border-color:var(--green);
+    box-shadow: 0 8px 20px rgba(88,166,255,.15);
+}
+.filter-chip button{
+    background:none;
+    border:none;
+    color:var(--text-secondary);
+    cursor:pointer;
+    font-size:1rem;
+}
+.filter-chip button:hover{
+    color:#ff6b6b;
+}
+.clear-filters-button{
+    background:#21262D;
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:.45rem .8rem;
+    color:var(--text-secondary);
+    font-size:1rem;
+    transition:.2s;
+}
+.clear-filters-button:hover{
+    color:#ff6b6b;
+    border-color:var(--green);
+    box-shadow: 0 8px 20px rgba(88,166,255,.15);
+    transform:scale(1.1);
 }
 
 #jobs{

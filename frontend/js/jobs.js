@@ -71,4 +71,5 @@ async function loadJobs(filters = {}){
     jobsContainer.innerHTML = "";
     resultsCount.textContent =`${jobs.length} resultados encontrados`;
     jobs.forEach(createJobCard);
+    renderActiveFilters();
 }
