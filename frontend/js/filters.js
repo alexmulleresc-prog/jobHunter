@@ -10,7 +10,8 @@ function handleSearch(){
     clearTimeout(timeout);
     timeout = setTimeout(async () => {
         const query = searchInput.value.trim();
-        await loadJobs({search: query});
+        currentFilters.search = query;
+        await loadJobs(currentFilters);
     },300);
 }
 

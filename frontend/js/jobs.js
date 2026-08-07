@@ -30,6 +30,7 @@ function createJobCard(job){
             <div>
                 <h2 class="job-title">${job.titulo}</h2>
                 <p class="job-company">${job.empresa}</p>
+                
             </div>
             <button class="favorite-button">
                 ♡
@@ -37,7 +38,7 @@ function createJobCard(job){
         </div>
         <div class="job-meta">
             <div class="location">${formatLocation(job.ubicacion)}</div>
-            <div class="salary">${job.salario ? `<div class="salary">${job.salario}</div>` : ""}</div>
+            <div class="salary">${job.salario ? job.salario : ""}</div>
         </div>
         <div class="job-tags">
             ${
@@ -52,6 +53,7 @@ function createJobCard(job){
             <span class="job-date">
                 ${formatDate(job.fecha_publicacion)}
             </span>
+            <p class="job-source">🌐 ${job.fuente}</p>
             <a
                 href="${job.url}"
                 target="_blank"

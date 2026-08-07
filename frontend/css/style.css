@@ -81,9 +81,14 @@ body{
     border-radius:var(--radius);
     font-size:1rem;
 }
+#search-input:hover{
+    border-color:var(--green);
+    box-shadow: 0 8px 20px rgba(88,166,255,.15);
+}
 #search-input:focus{
     outline:none;
     border-color:var(--blue);
+    box-shadow: 0 8px 20px rgba(88, 255, 121, 0.15);
 }
 
 #dashboard{
@@ -189,7 +194,6 @@ body{
 }
 .job-company{
     color:var(--text-secondary);
-    margin-top:.25rem;
 }
 .job-meta{
     display:flex;
@@ -224,6 +228,10 @@ body{
     justify-content:space-between;
     align-items:center;
     padding:var(--spacing-xs) 0;
+}
+.job-source{
+    color: var(--text-secondary);
+    font-size: .9rem;
 }
 .job-link{
     color:var(--blue);
