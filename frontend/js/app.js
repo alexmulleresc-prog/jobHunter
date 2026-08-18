@@ -4,5 +4,6 @@ async function init(){
     await loadJobs();
     initializeSearch();
     await initializeDashboardFilters();
+    initializeUpdateButton();
 }
 init();

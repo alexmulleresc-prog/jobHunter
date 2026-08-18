@@ -11,11 +11,12 @@ async function getJobs(filters = {}){
     return await response.json();
 }
 
-async function searchJobs(query){
-
-}
-
 async function getFilters(){
     const response = await fetch(`${API_URL}/filters`);
+    return await response.json();
+}
+
+async function runScrapers(){
+    const response = await fetch(`${API_URL}/scrapers/run`,{method: "POST"});
     return await response.json();
 }

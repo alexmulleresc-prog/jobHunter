@@ -3,6 +3,11 @@ from backend.scrapers.weworkremotely import WeWorkRemotelyScraper
 from backend.repositories.job_repository import JobRepository
 from backend.models import job
 from backend.database.database import SessionLocal
+import json
+from pathlib import Path
+from datetime import datetime
+
+UPDATE_INFO_PATH = Path("backend/data/update_info.json")
 
 class JobService:
     def __init__(self):
@@ -61,4 +66,22 @@ class JobService:
                     self.repository.create(job)
                     empleos_agregados += 1
             empleos.extend(jobs)
-        return {"mensaje": f"Scrapers ejecutados. Se encontraron {len(empleos)} empleos nuevos. Se agregaron {empleos_agregados} empleos a la base de datos."}
+        self._save_update_info(empleos_agregados)
+        return {"status": "success", "jobs_found": len(empleos), "new_jobs": empleos_agregados, "total_jobs": self.get_total_jobs_count()}
+
+    def _save_update_info(self, new_jobs):
+        data = {
+            "last_update": datetime.now().isoformat(),
+            "last_new_jobs": new_jobs
+        }
+        with open(UPDATE_INFO_PATH, "w", encoding="utf-8") as file:
+            json.dump(data, file, indent=4)
+
+    def _get_update_info(self):
+        if not UPDATE_INFO_PATH.exists():
+            return {
+                "last_update": None,
+                "last_new_jobs": 0
+            }
+        with open(UPDATE_INFO_PATH, "r", encoding="utf-8") as file:
+            return json.load(file)

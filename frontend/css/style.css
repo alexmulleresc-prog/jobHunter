@@ -127,6 +127,11 @@ body{
     border-color:var(--green);
     box-shadow: 0 8px 20px rgba(88,166,255,.15);
 }
+.stat-time{
+    color:var(--text-secondary);
+    font-size:.9rem;
+    margin-top:.9rem;
+}
 .dropdown-menu{
     position:absolute;
     background:var(--surface);
