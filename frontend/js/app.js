@@ -5,5 +5,9 @@ async function init(){
     initializeSearch();
     await initializeDashboardFilters();
     initializeUpdateButton();
+    initializeSort();
+    initializeNewJobsCard();
+    initializeFavoritesButton();
+    initializeBackButton();
 }
 init();

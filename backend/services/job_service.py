@@ -33,9 +33,24 @@ class JobService:
                modalidad: str | None = None,
                tag: str | None = None,
                search: str | None = None,
+               orden: str = "recientes",
                limit: int = 100,
                offset: int = 0):
-        return self.repository.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, search=search, limit=limit, offset=offset)
+        return self.repository.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, search=search,orden=orden, limit=limit, offset=offset)
+
+    def count_search(self,
+                     empresa :str | None = None,
+                     fuente: str|None = None, 
+                     modalidad: str | None = None, 
+                     tag: str | None = None,
+                     search: str | None = None) -> int:
+        return self.repository.count_search(
+            fuente=fuente,
+            empresa=empresa,
+            modalidad=modalidad,
+            tag=tag,
+            search=search
+        )
 #### FUNCION DE FILTROS ###
     def get_filters(self):
         return {
@@ -59,20 +74,23 @@ class JobService:
     def ejecutar_scraper(self):
         empleos = []
         empleos_agregados = 0
+        nuevas_urls = []
         for scraper in self.scrapers:
             jobs = scraper.buscar_empleos()
             for job in jobs:
                 if not self.repository.exists(job.url):
                     self.repository.create(job)
+                    nuevas_urls.append(job.url)
                     empleos_agregados += 1
             empleos.extend(jobs)
-        self._save_update_info(empleos_agregados)
+        self._save_update_info(nuevas_urls)
         return {"status": "success", "jobs_found": len(empleos), "new_jobs": empleos_agregados, "total_jobs": self.get_total_jobs_count()}
 
     def _save_update_info(self, new_jobs):
         data = {
             "last_update": datetime.now().isoformat(),
-            "last_new_jobs": new_jobs
+            "last_new_jobs": len(new_jobs),
+            "new_job_urls": new_jobs
         }
         with open(UPDATE_INFO_PATH, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=4)
@@ -85,3 +103,10 @@ class JobService:
             }
         with open(UPDATE_INFO_PATH, "r", encoding="utf-8") as file:
             return json.load(file)
+
+    def get_new_jobs(self):
+        update_info = self._get_update_info()
+        new_job_urls = update_info.get("new_job_urls", [])
+        if not new_job_urls:
+            return []
+        return self.repository.get_jobs_by_urls(new_job_urls)

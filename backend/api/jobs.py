@@ -9,10 +9,19 @@ def obtener_empleos(fuente: str | None = None,
                     modalidad: str | None = None,
                     tag: str | None = None,
                     search: str | None = None,
-                    limit: int = 100,
+                    orden: str = "recientes",
+                    limit: int = 25,
                     offset: int = 0):
     service = JobService()
-    return service.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, search=search, limit=limit, offset=offset)
+    jobs = service.search(fuente=fuente, empresa=empresa, modalidad=modalidad, tag=tag, search=search,orden=orden, limit=limit, offset=offset)
+    total = service.count_search(fuente=fuente,empresa=empresa,modalidad=modalidad,tag=tag,search=search)
+    return{"jobs":jobs,
+           "total":total}
+
+@router.get("/empleos/nuevos")
+def obtener_nuevos_empleos():
+    service = JobService()
+    return service.get_new_jobs()
 
 @router.get("/empleos/todos")
 def obtener_todos_los_empleos():

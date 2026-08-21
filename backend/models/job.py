@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class Job(BaseModel):
     titulo: str
@@ -7,7 +7,7 @@ class Job(BaseModel):
     ubicacion: str
     url: str
     fecha_publicacion: datetime | None = None
-    fecha_scraping: datetime = datetime.now()
+    fecha_scraping: datetime = Field(default_factory=datetime.now)
     descripcion: str | None = None
     tipo_empleo: str | None = None
     modalidad: str | None = None
