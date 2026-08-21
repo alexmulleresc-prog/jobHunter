@@ -83,8 +83,11 @@ let currentPage = 1;
 const jobsPerPage = 25;
 let totalResults = 0;
 let currentOrder = "recientes";
+let currentView = "all";
+let specialJobs = [];
 
 async function loadJobs(filters = {}){
+    currentView = "all";
     const result = await getJobs({...filters, orden: currentOrder, limit: jobsPerPage, offset: (currentPage - 1) * jobsPerPage});
     const jobs =result.jobs;
     totalResults = result.total;
@@ -106,19 +109,30 @@ function renderPagination(){
     const previousButton = document.createElement("button");
     previousButton.textContent = "Anterior";
     previousButton.disabled = currentPage === 1;
-    previousButton.addEventListener("click", async () => {
-        currentPage--;
-        await loadJobs(currentFilters);
+    previousButton.addEventListener("click", async () => {currentPage--;
+        if(currentView === "all"){
+            await loadJobs(currentFilters);}
+        else {renderSpecialJobsPage();}
         window.scrollTo({top: 0,behavior: "smooth"});
     });
     pagination.appendChild(previousButton);
     const pages = [];
     pages.push(1);
     if(currentPage > 3){pages.push("...");}
-    for(let page = currentPage - 1; page <= currentPage + 1; page++){
-        if(page > 1 && page < totalPages){pages.push(page);}}
-    if(currentPage < totalPages - 2){pages.push("...");}
-    if(totalPages > 1){pages.push(totalPages);}
+    for(
+        let page = currentPage - 1;
+        page <= currentPage + 1;
+        page++
+    ){
+        if(page > 1 && page < totalPages){
+            pages.push(page);}
+    }
+    if(currentPage < totalPages - 2){
+        pages.push("...");
+    }
+    if(totalPages > 1){
+        pages.push(totalPages);
+    }
     pages.forEach(page => {
         if(page === "..."){
             const dots = document.createElement("span");
@@ -133,11 +147,12 @@ function renderPagination(){
         }
         pageButton.addEventListener("click", async () => {
             currentPage = page;
-            await loadJobs(currentFilters);
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            if(currentView === "all"){
+                await loadJobs(currentFilters);
+            } else {
+                renderSpecialJobsPage();
+            }
+            window.scrollTo({top: 0,behavior: "smooth"});
         });
         pagination.appendChild(pageButton);
     });
@@ -146,13 +161,28 @@ function renderPagination(){
     nextButton.disabled = currentPage === totalPages;
     nextButton.addEventListener("click", async () => {
         currentPage++;
-        await loadJobs(currentFilters);
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        if(currentView === "all"){
+            await loadJobs(currentFilters);}
+        else {renderSpecialJobsPage();}
+        window.scrollTo({top: 0,behavior: "smooth"});
     });
     pagination.appendChild(nextButton);
+}
+function renderSpecialJobsPage(){
+    jobsContainer.innerHTML = "";
+    const start = (currentPage - 1) * jobsPerPage;
+    const end = Math.min(start + jobsPerPage, specialJobs.length);
+    const jobsToShow = specialJobs.slice(start, end);
+    if(currentView === "new"){
+        resultsCount.textContent =
+            `Mostrando ${start + 1} - ${end} de ${specialJobs.length} resultados · Nuevos empleos`;
+    }
+    if(currentView === "favorites"){
+        resultsCount.textContent =
+            `Mostrando ${start + 1} - ${end} de ${specialJobs.length} empleos favoritos`;
+    }
+    jobsToShow.forEach(createJobCard);
+    renderPagination();
 }
 
 function initializeNewJobsCard(){
@@ -164,10 +194,9 @@ function initializeNewJobsCard(){
         jobsContainer.innerHTML = "";
         totalResults = jobs.length;
         currentPage = 1;
-        resultsCount.textContent =
-            `Mostrando 1 - ${jobs.length} de ${jobs.length} resultados · Nuevos empleos`;
-        jobs.forEach(createJobCard);
-        renderPagination();
+        currentView = "new";
+        specialJobs = jobs;
+        renderSpecialJobsPage();
         backButton.style.display = "block";
         window.scrollTo({top: 0, behavior: "smooth"});
     });
@@ -185,17 +214,19 @@ async function loadFavorites(){
     const favorites = JSON.parse(localStorage.getItem("jobhunter-favorites") || "[]");
     const favoritesButton = document.getElementById("favorites-button");
     favoritesButton.classList.add("favorite-active");
-    jobsContainer.innerHTML = ""; currentPage = 1; totalResults = 0;
+    jobsContainer.innerHTML = "";
+    currentView = "favorites";
+    currentPage = 1;
+    totalResults = 0;
+    specialJobs = [];
     if(favorites.length === 0){
         resultsCount.textContent = "No tenés empleos favoritos"; pagination.innerHTML = ""; return;}
     const response = await fetch(`${API_URL}/empleos/todos`);
     const allJobs = await response.json();
     const favoriteJobs = allJobs.filter(job =>favorites.includes(job.url));
+    specialJobs = favoriteJobs;
     totalResults = favoriteJobs.length;
-    resultsCount.textContent =
-        `Mostrando 1 - ${favoriteJobs.length} de ${favoriteJobs.length} favoritos`;
-    favoriteJobs.forEach(createJobCard);
-    renderPagination();
+    renderSpecialJobsPage();
     window.scrollTo({top: 0,behavior: "smooth"});
 }
 

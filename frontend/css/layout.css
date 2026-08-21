@@ -7,10 +7,10 @@
     border:1px solid yellow;
     height: 500px;
 }*/
-#assistant{
+/*#assistant{
     border:1px solid white;
     height: 500px;
-}
+}*/
 main{
     max-width:var(--max-width);
     margin:auto;
