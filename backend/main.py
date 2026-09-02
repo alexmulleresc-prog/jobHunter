@@ -6,6 +6,9 @@ from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="JobHunter AI")
+@app.get("/health")
+def health_check():
+    return {"status":"ok"}
 app.include_router(stats.router)
 app.include_router(router)
 app.include_router(scrapers.router)
