@@ -9,6 +9,10 @@ class WeWorkRemotelyScraper:
     
     def buscar_empleos(self):
         html = obtener_html(self.URL)
+
+        print(f"WWR HTML length: {len(html)}", flush=True)
+        print(f"WWR title: {BeautifulSoup(html, 'html.parser').title}", flush=True)
+
         return self._extraer_empleos(html)
 
     def _extraer_empleos(self, html):
